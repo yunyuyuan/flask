@@ -1,0 +1,474 @@
+.left-menu-div{
+    display: block;
+    width: 230px;
+    height: auto;
+    padding-bottom: 40px;
+    clear: left;
+    -webkit-box-shadow:0 0 10px darkgray;
+    position: fixed;
+    margin-top: 40px;
+}
+.menu-ul{
+    display: block;
+    padding-top: 60px;
+    padding-left: 30px;
+    margin:0;
+}
+.menu-ul button{
+    display: block;
+    margin: 20px 0 0 45px;
+    background-color: #FF4B2B;
+    width: 80px;
+    height: 35px;
+    font-size: 15px;
+    color: #DDDDDD;
+    font-family: 'Consolas', 'sans-serif';
+    border: 0;
+    border-radius: 8px;
+}
+
+.menu-li{
+    display: block;
+    width: 180px;
+    height: 60px;
+    margin: 0;
+    text-align: -webkit-match-parent;
+}
+/*我的信息菜单*/
+.menu-li#menu-user{
+    background: url("icon/people.png") no-repeat 8px 13px;
+    border-radius: 10px;
+}
+.menu-li#menu-user-active{
+    background: url("icon/people.png") no-repeat 8px 13px #0091ea;
+    border-radius: 10px;
+}
+.menu-li#menu-user-active a{
+
+    color: #ffffff;
+}
+/*我的收藏菜单*/
+.menu-li#menu-collection{
+    background: url("icon/collect.png") no-repeat 8px 13px;
+    border-radius: 10px;
+}
+.menu-li#menu-collection-active{
+    background: url("icon/collect.png") no-repeat 8px 13px #0091ea;
+    border-radius: 10px;
+}
+.menu-li#menu-collection-active a{
+
+    color: #ffffff;
+}
+/*上传视频菜单*/
+.menu-li#menu-upload{
+    background: url("icon/upload.png") no-repeat 8px 13px;
+    border-radius: 10px;
+}
+.menu-li#menu-upload-active{
+    background: url("icon/upload.png") no-repeat 8px 13px #0091ea;
+    border-radius: 10px;
+}
+.menu-li#menu-upload-active a{
+
+    color: #ffffff;
+}
+/*管理用户菜单*/
+.menu-li#menu-users{
+    background: url("icon/users.png") no-repeat 8px 13px;
+    border-radius: 10px;
+}
+.menu-li#menu-users-active{
+    background: url("icon/users.png") no-repeat 8px 13px #0091ea;
+    border-radius: 10px;
+}
+.menu-li#menu-users-active a{
+
+    color: #ffffff;
+}
+/*管理视频菜单*/
+.menu-li#menu-movies{
+    background: url("icon/movies.png") no-repeat 8px 13px;
+    border-radius: 10px;
+}
+.menu-li#menu-movies-active{
+    background: url("icon/movies.png") no-repeat 8px 13px #0091ea;
+    border-radius: 10px;
+}
+.menu-li#menu-movies-active a{
+
+    color: #ffffff;
+}
+/*鼠标放上去*/
+.menu-li a:hover{
+    color: gold;
+}
+/*菜单内容文字*/
+.menu-li a{
+    display: block;
+    width: 100px;
+    font-family: 'Raleway', 'sans-serif';
+    color: #333333;
+    font-size: 25px;
+    text-decoration: none;
+    padding: 15px 20px 0 0;
+    margin-left: 50px;
+    text-align: center;
+}
+/*****************************************************************************/
+.container{
+    width: 100%;
+    margin: 0;
+    line-height:150%;
+}
+/*****************************************************************************/
+/*左边  用户头像,id部分*/
+.user_left_info{
+    display: inline-block;
+    width: 20%;
+    top: -337px;
+    height: 250px;
+    min-width: 220px;
+    -webkit-box-shadow:0 0 10px darkgray;
+    margin: 40px 30px 0 265px;
+    position: relative;
+}
+.user_left_info img{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-top: 15px;
+}
+.user_left_info p#id{
+    font-family: 'Raleway', 'sans-serif';
+    font-size: 18px;
+    color: gray;
+    text-align: center;
+    margin-bottom: 10px;
+}
+.user_left_info p#name{
+    font-family: 'Raleway', 'sans-serif';
+    font-size: 30px;
+    color: #222222;
+    text-align: center;
+    margin-top: 10px;
+}
+/*右边  用户签名，号码等部分*/
+.user_right_info{
+    display: inline-block;
+    width: 40%;
+    min-width: 400px;
+    height: 550px;
+    padding-top: 30px;
+    margin: 40px 0 0 0;
+    -webkit-box-shadow:0 0 10px darkgray;
+    position: relative;
+}
+.user_right_info label{
+    height: 50px;
+    margin-left: 30px;
+    font-family: 'Raleway', 'sans-serif';
+    font-size: 25px;
+    color: coral;
+}
+.user_right_info input{
+    width: 300px;
+    border: 1px solid #0091ea;
+    border-radius: 10px;
+    margin: 15px 0 15px 30px;
+    font-family: 'Raleway', 'sans-serif';
+    font-size: 25px;
+}
+.user_right_info input[type='submit']{
+    width: 80px;
+    background-color: #FF4B2B;
+    border-radius: 10px;
+    color: #FFFFFF;
+    margin: 15px 0 15px 120px;
+    font-family: 'Raleway', 'sans-serif';
+    font-size: 21px;
+}
+.user_right_info input:focus{
+    outline: none;
+    border: 1px solid #FF416C;
+}
+/*****************************************************************************/
+/*上传视频*/
+.upload_video{
+    display: block;
+    width: 60%;
+    height: 850px;
+    float: left;
+    padding-top: 30px;
+    margin: 40px 0 50px 350px;
+    -webkit-box-shadow:0 0 10px darkgray;
+    position: relative;
+}
+.upload_video label{
+    height: 50px;
+    margin-left: 30px;
+    font-family: 'Raleway', 'sans-serif';
+    font-size: 25px;
+    color: coral;
+}
+.upload_video input{
+    width: 500px;
+    padding-left: 5px;
+    border: 1px solid #0091ea;
+    border-radius: 10px;
+    margin: 15px 0 15px 30px;
+    font-family: 'Raleway', 'sans-serif';
+    font-size: 25px;
+}
+.upload_video input:focus{
+    outline: none;
+    border: 1px solid #FF416C;
+}
+.upload_video input[type='submit']{
+    background: coral;
+    color: #DDDDDD;
+    margin-left: 200px;
+    width: 100px;
+    border: 1px solid #3c97bf;
+}
+.upload_video input[type='file']{
+    position: relative;
+    display: inline-block;
+    background: #D0EEFF;
+    border: 1px solid #99D3F5;
+    border-radius: 4px;
+    padding: 4px 12px;
+    overflow: hidden;
+    color: #1E88C7;
+    text-decoration: none;
+    text-indent: 0;
+    line-height: 20px;
+    font-size: 20px;
+    right: 0;
+    top: 0;
+    opacity: 0.8;
+}
+.upload_video form a{
+    display: block;
+    width: 550px;
+    background-color: #3c97bf;
+    border-radius: 8px;
+    font-size: 18px;
+    padding: 5px 15px 5px 15px;
+    color: #FFFFFF;
+    margin: 0 150px 20px 30px;
+}
+.upload_video textarea{
+    width: 580px;
+    height: 150px;
+    border: 1px solid #0091ea;
+    border-radius: 10px;
+    margin: 15px 0 15px 30px;
+    font-family: 'Raleway', 'sans-serif';
+    font-size: 18px;
+}
+.upload_video textarea:focus{
+    outline: none;
+    border: 1px solid #FF416C;
+}
+/*****************************************************************************/
+/*管理用户*/
+.manage-users {
+    display: block;
+    margin: 40px 200px 20px 270px;
+    width: 750px;
+    height: 550px;
+    -webkit-box-shadow: 0 0 10px darkgray;
+    float: left;
+    position: relative;
+}
+.users-ul{
+    width: 700px;
+    list-style: none;
+    height: 450px;
+    overflow: auto;
+}
+.users-li-main{
+    height: 40px;
+    margin: 10px 40px 0 10px;
+    -webkit-box-shadow: 0 0 6px darkgray;
+}
+.users-li{
+    height: 40px;
+    margin: 10px 40px 10px 10px;
+    -webkit-box-shadow: 0 0 6px darkgray;
+}
+.a1{
+    display: inline-block;
+    width: 50px;
+    padding-top: 8px;
+    height: 32px;
+    margin: 0 5px;
+    text-align: center;
+    background-color: #0091ea;
+    border-radius: 8px;
+    color: #FFFFFF;
+    font-family: 'Consolas', 'serif';
+    font-size: 19px;
+}
+.a2{
+    display: inline-block;
+    padding-top: 8px;
+    width: 150px;
+    height: 32px;
+    margin: 0 5px;
+    text-align: center;
+    background-color: #0091ea;
+    border-radius: 8px;
+    color: #FFFFFF;
+    font-family: 'Consolas', 'serif';
+    font-size: 19px;
+}
+.a3{
+    display: inline-block;
+    padding-top: 8px;
+    width: 200px;
+    height: 32px;
+    margin: 0 5px;
+    text-align: center;
+    background-color: #0091ea;
+    border-radius: 8px;
+    color: #FFFFFF;
+    font-family: 'Consolas', 'serif';
+    font-size: 19px;
+}
+.a4{
+    position: relative;
+    top: 5px;
+    display: inline-block;
+    padding: 0;
+    width: 25px;
+    height: 25px;
+    margin: 0 15px;
+    text-align: center;
+    background-color: green;
+    border-radius: 50%;
+    font-family: 'Consolas', 'serif';
+    font-size: 19px;
+}
+.aa1{
+    display: inline-block;
+    width: 50px;
+    padding-top: 8px;
+    height: 32px;
+    margin: 0 5px;
+    text-align: center;
+    background-color: #FF4B2B;
+    border-radius: 8px;
+    color: #000000;
+    font-family: 'Consolas', 'serif';
+    font-size: 19px;
+}
+.aa2{
+    display: inline-block;
+    padding-top: 8px;
+    width: 150px;
+    height: 32px;
+    margin: 0 5px;
+    text-align: center;
+    background-color: #FF4B2B;
+    border-radius: 8px;
+    color: #000000;
+    font-family: 'Consolas', 'serif';
+    font-size: 19px;
+}
+.aa3{
+    display: inline-block;
+    padding-top: 8px;
+    width: 200px;
+    height: 32px;
+    margin: 0 5px;
+    text-align: center;
+    background-color: #FF4B2B;
+    border-radius: 8px;
+    color: #000000;
+    font-family: 'Consolas', 'serif';
+    font-size: 19px;
+}
+.aa4{
+    display: inline-block;
+    padding-top: 8px;
+    width: 50px;
+    height: 32px;
+    margin: 0 5px;
+    text-align: center;
+    background-color: #FF4B2B;
+    border-radius: 8px;
+    color: #000000;
+    font-family: 'Consolas', 'serif';
+    font-size: 19px;
+}
+.users-li-b{
+    display: block;
+    float: right;
+    margin: 5px 100px 0 0;
+    background-color: #FF4B2B;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    padding: 5px 8px;
+    font-family: "Microsoft YaHei UI", 'serif';
+}
+.users-li-b:hover{
+    color: #000000;
+}
+/*****************************************************************************/
+/*管理电影*/
+.b2{
+    display: inline-block;
+    padding-top: 8px;
+    width: 150px;
+    height: 32px;
+    margin: 0 5px;
+    text-align: center;
+    background-color: #0091ea;
+    border-radius: 8px;
+    color: #FFFFFF;
+    font-family: 'Consolas', 'serif';
+    font-size: 15px;
+    white-space: nowrap;
+}
+.b3{
+    display: inline-block;
+    padding-top: 8px;
+    width: 240px;
+    height: 32px;
+    margin: 0 5px;
+    text-align: center;
+    background-color: #0091ea;
+    border-radius: 8px;
+    color: #FFFFFF;
+    font-family: 'Consolas', 'serif';
+    font-size: 12px;
+    white-space: nowrap;
+}
+.movies-li-b{
+    display: block;
+    float: right;
+    margin: 5px 30px 0 0;
+    background-color: #FF4B2B;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    padding: 5px 8px;
+    font-family: "Microsoft YaHei UI", 'serif';
+}
+.movies-li-b1{
+    display: block;
+    float: right;
+    margin: 5px 30px 0 0;
+    background-color: #FF4B2B;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    padding: 5px 8px;
+    font-family: "Microsoft YaHei UI", 'serif';
+}

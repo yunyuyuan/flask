@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+<meta charset="UTF-8">
+<title>注册/登陆</title>
+<link rel="stylesheet" href="../static/login_style.css">
+</head>
+<body>
+
+  <h2>登录/注册</h2>
+<div class="container" id="container">
+	<div class="form-container sign-in-container">
+		<form action="/login" method="POST">
+			<h1>登录</h1>
+			<input name="number" type="text" placeholder="账号" />
+			<input name="password" type="password" placeholder="密码" /><br>
+			<button type="submit">登录</button>
+			{% with messages = get_flashed_messages() %}
+			{% if messages %}
+			<ul class="flashs">
+				{% for message in messages %}
+				<li>{{ message }}</li>
+				{% endfor %}
+			</ul>
+			{% endif %}
+			{% endwith %}
+		</form>
+	</div>
+	<div class="overlay-container">
+		<div class="overlay">
+			<div class="overlay-panel overlay-right">
+				<h1>你好朋友！</h1>
+				<p>输入您的个人信息注册成为会员。</p>
+				<button class="ghost" onclick=window.location.replace("/register")>注册</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,258 @@
+<title>搜索</title>
+{% extends 'head.html' %}
+{% block body %}
+<link rel="stylesheet" href="../static/search_style.css">
+
+<div class="container">
+        <center>
+        <div class="search">
+            <input type="text" id="search-info" placeholder="输入以搜索">
+            <button onclick="chosen(this)">提交</button>
+        </div></center><center>
+        <div class="movies">
+            <a style="font-family: 'Microsoft YaHei UI', 'serif';font-size: 20px;" id="is-match"></a>
+        </div></center>
+        <center><div class="pages">
+
+        </div></center>
+</div>
+
+<script type="text/javascript">
+    // 当前页码
+    var now_page = 1;
+    // 显示的几页
+    var count = 0;
+    // 所有页
+    var all_page = 0;
+    // 全部电影
+    // var m;
+    // 取得搜索内容
+    function chosen(e) {
+        now_page = 1;
+        // 删除存在的换页按钮
+        let _parent = document.getElementsByClassName("pages")[0];
+        let buttons = _parent.childNodes;
+        if (buttons){
+            for (let i=buttons.length-1;i>0;i--){
+                _parent.removeChild(buttons[i]);}}
+        // 删除已经找到的movie-ul
+        let parent = document.getElementsByClassName("movies")[0];
+        let child = document.getElementById("movie-ul");
+        if (child){parent.removeChild(child);}
+
+        // 发送Ajax请求第一页数据
+        let tags = document.getElementById("search-info").value;
+        // 显示第一页电影和按钮
+        req('['+ tags, show_movies);
+    }
+
+    // Ajax请求函数
+    function req(data, func) {
+        let xmlhttp;
+        if (window.XMLHttpRequest) {
+            // IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+            xmlhttp=new XMLHttpRequest();
+        }
+        else {
+            // IE6, IE5 浏览器执行代码
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange=function() {
+            if (xmlhttp.readyState==4 && xmlhttp.status==200)
+            {
+              func(xmlhttp.responseText);
+            }
+        };
+        xmlhttp.open("POST","./" + data,true);
+        xmlhttp.send();
+    }
+
+    // 显示当页电影和换页按钮
+    function show_movies(s) {
+        // 没找到
+        if (s == '0'){document.getElementById("is-match").innerHTML = "抱歉，没有找到相关电影!";}
+        // 没发标签
+        else if(s == '1'){document.getElementById("is-match").innerHTML = "";}
+        // 找到了
+        else{
+            // 显示当页电影
+            page_movie(s);
+            // Ajax请求搜到的电影总数并显示按钮
+            req("all", show_button);
+        }
+    }
+
+    // 显示换页按钮
+    function show_button(all) {
+        // 删除存在的换页按钮
+        let _parent_ = document.getElementsByClassName("pages")[0];
+        let buttons = _parent_.childNodes;
+        if (buttons){
+            for (let i=buttons.length-1;i>0;i--){
+                _parent_.removeChild(buttons[i]);}}
+        if (all != "none"){
+            // 获取到搜索到的电影长度
+            all = parseInt(all);
+            // 所有页
+            all_page = Math.ceil(all/6);
+            document.getElementById("is-match").innerHTML = "找到相关电影->" + all.toString() + "<-部";
+        }
+        let _parent = document.getElementsByClassName("pages")[0];
+        // 添加按钮
+        let first_page = document.createElement('button');
+        first_page.id = "first-page";
+        first_page.className = "page-button";
+        first_page.innerHTML = "首页";
+        first_page.setAttribute("onclick","go_to(this)");
+        _parent.appendChild(first_page);
+
+        // 上一页
+        if (now_page>1){
+            let up_page = document.createElement('button');
+            up_page.id = "up_page";
+            up_page.className = "page-button";
+            up_page.innerHTML = "上一页";
+            up_page.setAttribute("onclick","go_to(this)");
+            _parent.appendChild(up_page);}
+
+        // 只有5页或更少
+        if (all_page<=5){
+            count = 0;
+            for (let i = 0; i<all_page; i += 1) {
+                let page = document.createElement('button');
+                page.className = "page-button";
+                page.innerHTML = count + 1;
+                page.id = count;
+                page.setAttribute("onclick", "go_to(this)");
+                _parent.appendChild(page);
+                count += 1;
+            }
+        }
+        // 大于5页
+        // 前3页
+        else if (now_page<3) {
+            count = 0;
+            for (let i = 0; i<all_page&&count<5; i += 1) {
+                let page = document.createElement('button');
+                page.className = "page-button";
+                page.innerHTML = count + 1;
+                page.id = count;
+                page.setAttribute("onclick", "go_to(this)");
+                _parent.appendChild(page);
+                count += 1;
+            }}
+        // 中间
+        else if (3<=now_page&&now_page<=all_page-2) {
+            count = now_page - 3;
+            for (let i = 0; i<5; i += 1) {
+                let page = document.createElement('button');
+                page.className = "page-button";
+                page.innerHTML = count + 1;
+                page.id = count;
+                page.setAttribute("onclick", "go_to(this)");
+                _parent.appendChild(page);
+                count += 1;
+            }}
+        // 后3页
+        else if (now_page>all_page-2) {
+            count = all_page - 5;
+            for (let i = 0; i<5; i += 1) {
+                let page = document.createElement('button');
+                page.className = "page-button";
+                page.innerHTML = count + 1;
+                page.id = count;
+                page.setAttribute("onclick", "go_to(this)");
+                _parent.appendChild(page);
+                count += 1;
+            }}
+        // 下一页
+        if (now_page<all_page){
+            let next_page = document.createElement('button');
+            next_page.id = "next_page";
+            next_page.className = "page-button";
+            next_page.innerHTML = "下一页";
+            next_page.setAttribute("onclick","go_to(this)");
+            _parent.appendChild(next_page);}
+
+        let last_page = document.createElement('button');
+        last_page.id = "last_page";
+        last_page.className = "page-button";
+        last_page.setAttribute("onclick","go_to(this)");
+        last_page.innerHTML = "尾页";
+        _parent.appendChild(last_page);
+        // 置当前页按钮为黑色
+        document.getElementById((now_page-1).toString()).style.color = "#000000";
+    }
+
+    // 显示本页电影
+    function page_movie(s) {
+        // 删除已经找到的movie-ul
+        let parent = document.getElementsByClassName("movies")[0];
+        let child = document.getElementById("movie-ul");
+        if (child){parent.removeChild(child);}
+        // 还原成数组
+        let m = s.slice(0,-1);
+        m = m.split('|');
+        // 创建列表
+        let ul_parent = document.createElement('ul');
+        ul_parent.id = "movie-ul";
+        document.getElementsByClassName("movies")[0].appendChild(ul_parent);
+        for (let i=0;i<m.length;i+=4){
+            //新建li
+            let new_li = document.createElement('li');
+            new_li.className = "movie-li";
+            ul_parent.appendChild(new_li);
+            //新建img
+            let new_img = document.createElement('img');
+            new_img.className = "movie-img";
+            new_img.src = "../static/movie_image/" + m[i+1];
+            new_li.appendChild(new_img);
+            //新建name
+            let new_name = document.createElement('p');
+            let b = document.createElement('b');
+            b.appendChild(new_name)
+            new_name.className = "movie-name";
+            new_name.innerHTML = m[i]+'('+m[i+3]+')';
+            new_li.appendChild(b);
+            //新建标签
+            let new_tag = document.createElement('p');
+            new_tag.className = "movie-tag";
+            new_tag.innerText = m[i+2];
+            new_li.appendChild(new_tag);
+            //新建play
+            let new_play = document.createElement('a');
+            new_play.className = "movie-play";
+            new_play.href = '../play/' + m[i+1].slice(0,-4);
+            new_li.appendChild(new_play);
+        }
+    }
+
+    // 点击按钮跳页
+    function go_to(b) {
+        let page = b.innerHTML;
+        // 首页
+        if (page == "首页"){
+            now_page = 1;
+        }
+        // 尾页
+        else if (page == "尾页"){
+            now_page = all_page;
+        }
+        // 上一页
+        else if (page == "上一页"){
+            now_page -= 1;
+        }
+        // 下一页
+        else if (page == "下一页"){
+            now_page += 1;
+        }
+        // 某页
+        else{
+            now_page = parseInt(page);
+        }
+        req(now_page, page_movie);
+        show_button("none");
+    }
+</script>
+
+{% endblock %}

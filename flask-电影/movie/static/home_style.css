@@ -1,0 +1,89 @@
+.bodyCon08 ul{list-style:none;}
+.bodyCon08 img,a img {border:none;}
+.bodyCon08 a{text-decoration:none;}
+.bodyCon08 a{color:#000;}
+.bodyCon08 a:hover{text-decoration:none;}
+/**基本格式结束***************/
+
+/*单页头部开始*/
+.bodyCon08{height: 280px;width:900px;margin-left: 100px;position: relative;}
+.bodyCon08 .students{margin:10px 0 0 0;width:1100px;height:480px;position:relative;padding: 0}
+.bodyCon08 .students p.PP{width:510px;height:50px;font-size:16px;color:#333;text-align:center;position:absolute;top:60px; left:300px;}
+.four_flash{width:1100px;height:400px; margin:0;position:absolute;padding: 0}
+
+.four_flash .flashBg{width:1080px;height:400px;margin:0;padding-left: 0;position:relative;overflow:hidden;}
+.four_flash .flashBg ul.mobile{width:2000%;height:390px; position:absolute; left:0;padding: 0;}
+.four_flash .flashBg ul.mobile li{border:2px solid #3c97bf;background-color: #D0EEFF;border-radius: 10px;width: 240px;float:left;height:320px;margin-left:26px;color:#6C6E85;}
+.four_flash .flashBg ul.mobile li:hover{border:2px solid #3c97bf;background-color: #67ACE4; color:#FF4B2B;}
+.four_flash .flashBg ul.mobile li img{width:240px;height:185px;border-radius: 7px;display:block; margin:0 auto;}
+.four_flash .flashBg ul.mobile li dd{font-size:25px;line-height:60px;text-align:center;}
+.four_flash .flashBg ul.mobile li p{font-size:16px; text-align:center;line-height:24px;margin:10px;}
+.four_flash .flashBg ul.mobile li a{display:block;background:url('../static/button_images/play.png') no-repeat;width:40px;height:41px;border:0;margin:8px auto;}
+.four_flash .flashBg ul.mobile li a:hover{background:url('../static/button_images/play_hover.png');}
+.four_flash .but_left{width:50px;height:100px;position:absolute; top:136px; left:-30px;}
+.four_flash .but_right{width:50px;height:100px; position:absolute; top:136px; right:-35px;}
+.four_flash .but_left:hover{background:url('../static/button_images/qianxleft1.png') no-repeat;}
+.four_flash .but_right:hover{background:url('../static/button_images/qianxr1.png') no-repeat;}
+.four_flash1{width:1100px;height:400px; margin:0;position:absolute;padding: 0}
+.four_flash1 .flashBg{width:1080px;height:400px;margin:0;padding-left: 0;position:relative;overflow:hidden;}
+.four_flash1 .flashBg ul.mobile{width:2000%;height:390px; position:absolute; left:0;padding: 0;}
+.four_flash1 .flashBg ul.mobile li{border:2px solid #3c97bf;background-color: #D0EEFF;border-radius: 10px;width: 240px;float:left;height:320px;margin-left:26px;color:#6C6E85;}
+.four_flash1 .flashBg ul.mobile li:hover{border:2px solid #3c97bf;background-color: #67ACE4; color:#FF4B2B;}
+.four_flash1 .flashBg ul.mobile li img{width:240px;border-radius: 7px;height:185px;display:block; margin:0 auto;}
+.four_flash1 .flashBg ul.mobile li dd{font-size:25px;line-height:60px;text-align:center;}
+.four_flash1 .flashBg ul.mobile li p{font-size:16px; text-align:center;line-height:24px;margin:10px;}
+.four_flash1 .flashBg ul.mobile li a{display:block;background:url('../static/button_images/play.png') no-repeat;width:40px;height:41px;border:0;margin:8px auto;}
+.four_flash1 .flashBg ul.mobile li a:hover{background:url('../static/button_images/play_hover.png');}
+.four_flash1 .but_left{width:50px;height:100px;position:absolute; top:136px; left:-30px;}
+.four_flash1 .but_right{width:50px;height:100px; position:absolute; top:136px; right:-35px;}
+.four_flash1 .but_left:hover{background:url('../static/button_images/qianxleft1.png') no-repeat;}
+.four_flash1 .but_right:hover{background:url('../static/button_images/qianxr1.png') no-repeat;}
+/*******************************************************/
+.container{
+    width: 100%;
+    margin: 0;
+    height: 100%;
+    /*overflow: auto;*/
+}
+/*******************************************************/
+/*.nominate{*/
+    /*display: block;*/
+    /*-webkit-box-shadow: 0 0 10px darkgray;*/
+    /*margin: 20px 0 10px 10px;*/
+    /*width: 1200px;*/
+    /*height: 300px;*/
+/*}*/
+/*.vote{*/
+    /*display: block;*/
+    /*float: right;*/
+    /*-webkit-box-shadow: 0 0 10px darkgray;*/
+    /*margin: 340px 0 10px 10px;*/
+    /*width: 1200px;*/
+    /*height: 300px;*/
+/*}*/
+.title{
+    display: inline-block;
+    background-color: lightslategray;
+    border-radius: 6px;
+    height: 330px;
+    width: 50px;
+    float: left;
+    clear: both;
+    margin: 25px 0 0 10px;
+    font-family: 'Raleway', 'sans-serif';
+    font-size: 30px;
+    position: relative;
+    writing-mode: vertical-lr;
+    text-align: -webkit-center;
+}
+#tuijian_div,#paihang_div{
+    display: block;
+    width: 100px;
+    height: 400px;
+    clear: left;
+    /*float: left;*/
+    padding-top: 10px;
+    margin: 30px 0 0 20px;
+    position: relative;
+}
+

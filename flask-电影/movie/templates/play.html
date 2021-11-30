@@ -1,0 +1,206 @@
+{% extends 'head.html' %}
+<title>{{ name }}</title>
+{% block body %}
+    <link rel="stylesheet" href="../static/play_style.css">
+    <div class="container">
+        <!--名字-->
+        <div class="video-name">
+            <center>
+            <p><b>{{ name }}</b></p>
+            <button id="collect" onclick="coll(this)">{% if is_coll==0 %}
+                收藏
+                {% else %}
+                取消收藏
+                {% endif %}</button></center>
+        </div>
+        <!--视频-->
+        <div class="video">
+            <p align="center"><video  src="../static/video/{{ file_name }}" controls="controls"></video></p>
+        </div>
+        <!--简介-->
+        <div id="summary" class="video-summary">
+            <p><b>简介:</b><br>&nbsp;&nbsp;&nbsp;&nbsp;{{ summary }}<br><b>年份:</b><br>&nbsp;&nbsp;&nbsp;&nbsp;{{ year }}</p>
+        </div>
+        <!--星级-->
+        <div id="star" class="video-star">
+            {% if star[1] == 0 %}
+            <a id="show_star">星级:暂无&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;评分人数:0</a>
+            {% else %}
+            <a id="show_star">星级:{{ star[0] }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;评分人数:{{ star[1] }}</a>
+            {% endif %}
+
+            {% if give_star %}
+            <a id="has_give">您已经评过分了！</a>
+            {% else %}
+            <div id="form">
+                <a id="pls_give">请给出评分:&nbsp;&nbsp;&nbsp;</a><input type="text" id="input_star" name="star" placeholder="0-5分">
+                &nbsp;&nbsp;&nbsp;<button onclick="modify_score()">确定</button>
+            </div>
+            {% endif %}
+        </div>
+        <!--评论-->
+        <div id="comment" class="video-comment">
+            <div id="comments">
+            <ul id="all_comments_ul">
+                {% for comment in range(len_com) %}
+                    <li class="comment-li">
+                        <div class="im_name">
+                            <!--头像-->
+                            <center><img src="../static/user_picture/{{ comments[comment][3] }}" /></center>
+                            <!--昵称-->
+                            <center><a>{{ comments[comment][2] }}</a></center>
+                        </div>
+                        <!--评论-->
+                        <div class="p_comment" onmouseover="show_btn(this)" onmouseout="hid_btn(this)">
+                            <a>{{ comments[comment][0] }}</a>
+                            {% if user_id == comments[comment][1] %}
+                                <button id="{{ comment }}" class="del_btn" onclick="del_com(this)">删除</button>
+                            {% endif %}
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+            </div>
+            <div id="give-comment">
+                <center><textarea id="input_comment" name="comment" placeholder="请勿带有不良言论！"></textarea></center>
+                <center><button onclick="give_comment()">提交</button></center>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+
+        window.onload = function(){
+          change_w();
+        };
+        window.onresize = function () {
+            change_w();
+        };
+        function change_w() {
+            var w = document.documentElement.clientWidth;
+            document.getElementById('summary').style.left = (w - 756)/2 + "px";
+            document.getElementById('star').style.left = (w - 760)/2 + "px";
+            document.getElementById('comment').style.left = (w - 760)/2 + "px";
+        }
+        // 修改评分
+        function modify_score() {
+            let score = document.getElementById('input_star').value;
+            req('modify' + score, modify_a);
+        }
+        //修改显示
+        function modify_a(info) {
+            let inf = info.split('|');
+            let parent = document.getElementById('star');
+            parent.removeChild(document.getElementById("form"));
+            let new_a = document.createElement('a');
+            new_a.id = "has_give";
+            new_a.innerHTML = "您已经评过分了！";
+            parent.appendChild(new_a);
+            document.getElementById("show_star").innerHTML = "星级:" + inf[0] + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;评分人数:' + inf[1];
+        }
+        // 请求函数
+        function req(data, func) {
+            let xmlhttp;
+            if (window.XMLHttpRequest) {
+                // IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+                xmlhttp=new XMLHttpRequest();
+            }
+            else {
+                // IE6, IE5 浏览器执行代码
+                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.onreadystatechange=function() {
+                if (xmlhttp.readyState==4 && xmlhttp.status==200 && func!=0)
+                {
+                  func(xmlhttp.responseText);
+                }
+        };
+        xmlhttp.open("POST","./" + data,true);
+        xmlhttp.send();
+        }
+        // 收藏or取消
+        function coll(e) {
+            let text = e.innerText;
+            if (text=="收藏"){
+                req('col-id:'+text, 0);
+                e.innerHTML = "取消收藏";
+            }
+            else{
+                req('rem-id:'+text, 0);
+                e.innerHTML = "收藏";
+            }
+        }
+        // 提交评论
+        function give_comment() {
+            let comment = document.getElementById('input_comment').value;
+            req('give-comment:'+comment, reload_comments);
+        }
+        // 刷新评论
+        function reload_comments(comments) {
+            let f = document.getElementById('all_comments_ul');
+            let children = f.childNodes;
+            // 删除所有评论
+            for (let i=children.length-1;i>=0;i--){
+                f.removeChild(children[i]);
+            }
+            // 构建新的评论
+            let comment = comments.split('|');
+            for (let i=0;i<comment.length-1;i+=4){
+                let new_li = document.createElement('li');
+                let new_i_d = document.createElement('div');
+                let new_img = document.createElement('img');
+                let new_name = document.createElement('a');
+                let new_p_d = document.createElement('div');
+                let new_p = document.createElement('a');
+                let center1 = document.createElement('center');
+                let center2 = document.createElement('center');
+                let btn = document.createElement('button');
+                new_li.className = 'comment-li';
+                new_i_d.className = 'im_name';
+                new_img.src = "../static/user_picture/" + comment[i+3];
+                center1.appendChild(new_img);
+                new_name.innerHTML = comment[i+2];
+                center2.appendChild(new_name);
+                new_i_d.appendChild(center1);
+                new_i_d.appendChild(center2);
+                btn.className = 'del_btn';
+                btn.innerText = '删除';
+                btn.id = (i/4).toString();
+                btn.setAttribute('onclick', 'del_com(this)');
+                new_p_d.className = 'p_comment';
+                if ('{{ user_id }}' == comment[i+1]){
+                    new_p_d.setAttribute('onmouseover', 'show_bt(this)');
+                    new_p_d.setAttribute('onmouseout', 'hid_bt(this)');
+                }
+                new_p.innerHTML = comment[i];
+                new_p_d.appendChild(new_p);
+                new_p_d.appendChild(btn);
+                new_li.appendChild(new_i_d);
+                new_li.appendChild(new_p_d);
+                document.getElementById('all_comments_ul').appendChild(new_li);
+            }
+        }
+        // 显示按钮
+        function show_btn(e) {
+            e.childNodes[3].style.display = 'inline-block';
+        }
+        // 隐藏按钮
+        function hid_btn(e) {
+            e.childNodes[3].style.display = 'none';
+        }
+        // 显示按钮
+        function show_bt(e) {
+            e.childNodes[1].style.display = 'inline-block';
+        }
+        // 隐藏按钮
+        function hid_bt(e) {
+            e.childNodes[1].style.display = 'none';
+        }
+        //删除
+        function del_com(e) {
+            let index = e.id;
+            req('del_index:'+index, reload_comments);
+        }
+    </script>
+
+{% endblock %}

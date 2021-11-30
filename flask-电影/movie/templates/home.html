@@ -1,0 +1,88 @@
+{% extends 'head.html' %}
+{% block body %}
+<link rel="stylesheet" href="../static/home_style.css">
+<div class="container">
+    <div id="tuijian_div"><a class="title" id="tuijian">推荐</a>
+        <div class="bodyCon08"><!--学员-->
+        <div class="students">
+              <div class="four_flash">
+                <div class="flashBg">
+                    <ul class="mobile">
+                        {% for i in range(lens[0]) %}
+                        <li>
+                            <img src="../static/movie_image/{{ videos[0][i][0][1] }}" />
+                            <p>{{ videos[0][i][1] }}</p>
+                            <p><b>{{ videos[0][i][2] }}({{ videos[0][i][3] }})</b></p>
+                            <a href="../play/{{ videos[0][i][0][0] }}"></a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="but_left"><img src="../static/button_images/qianxleft.png" /></div>
+                <div class="but_right"><img src="../static/button_images/qianxr.png" /></div>
+              </div>
+        </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="../static/js/jquery.js"></script>
+    <script type="text/javascript">
+    //学员
+    var _index5=0;
+    $(".four_flash .but_right img").click(function(){
+        var len=$(".four_flash .flashBg ul.mobile li").length;
+        if((_index5 + 4) < len){
+            _index5++;
+            $(".four_flash .flashBg ul.mobile").stop().animate({left: -_index5 * 270});
+        }
+        });
+    $(".four_flash .but_left img").click(function(){
+        if(_index5 > 0){
+            _index5--;
+            $(".four_flash .flashBg ul.mobile").stop().animate({left: -_index5 * 270});
+        }
+        });
+    </script>
+    <div id="paihang_div"><a class="title" id="paihang">排行</a>
+    <div class="bodyCon08">
+        <div class="students">
+              <div class="four_flash1">
+                <div class="flashBg">
+                    <ul class="mobile">
+                        {% for i in range(lens[1]) %}
+                        <li>
+                            <img src="../static/movie_image/{{ videos[1][i][0][1] }}" />
+                            <p>{{ videos[1][i][1] }}</p>
+                            <p><b>{{ videos[1][i][2] }}({{ videos[1][i][3] }})</b></p>
+                            <a href="../play/{{ videos[1][i][0][0] }}"></a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="but_left"><img src="../static/button_images/qianxleft.png" /></div>
+                <div class="but_right"><img src="../static/button_images/qianxr.png" /></div>
+              </div>
+        </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="../static/js/jquery.js"></script>
+    <script type="text/javascript">
+    //学员
+    var _index2=0;
+    $(".four_flash1 .but_right img").click(function(){
+        var len=$(".four_flash1 .flashBg ul.mobile li").length;
+        if((_index2 + 4) < len){
+            _index2++;
+            $(".four_flash1 .flashBg ul.mobile").stop().animate({left: -_index2 * 270});
+        }
+        });
+    $(".four_flash1 .but_left img").click(function(){
+        if(_index2 > 0){
+            _index2--;
+            $(".four_flash1 .flashBg ul.mobile").stop().animate({left: -_index2 * 270});
+        }
+        });
+    </script>
+</div>
+
+{% endblock %}

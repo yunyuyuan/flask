@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>注册</title>
+<link rel='stylesheet' href='../static/login_icon.css'>
+<link rel="stylesheet" href="../static/login_style.css">
+</head>
+<body>
+    <div class="register-container">
+        <div class="register-div">
+            <form action="/register" method="POST">
+                <h1>注册</h1><br>
+                <input id="number" name="number" type="text" placeholder="手机号/账号(11位或更少的数字)" />
+                <input name="name" type="text" placeholder="昵称" />
+                <input name="password" type="text" placeholder="密码" />
+                <input name="certain-password" type="text" placeholder="确认密码" /><br>
+                <button type="submit">提交</button>
+                <a href="./login">返回登陆</a>
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <ul class=flashes>
+                        {% for message in messages %}
+                        <li>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                {% endwith %}
+            </form>
+        </div>
+    </div>
+</body>
+</html>

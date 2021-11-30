@@ -1,0 +1,231 @@
+<title>个人</title>
+<meta http-equiv="Expires" content="0">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Cache-control" content="no-cache">
+<meta http-equiv="Cache" content="no-cache">
+{% extends 'head.html' %}
+{% block body %}
+<link rel="stylesheet" href="../static/admin_style.css">
+
+<div class="container">
+<!--最左边菜单界面-->
+    <div class="left-menu-div">
+        <ul class="menu-ul">
+            {% if active_item == "info" %}
+                <li class="menu-li" id="menu-user-active"><a href="../admin/info">我的信息</a></li>
+            {% else %}
+                <li class="menu-li" id="menu-user"><a href="../admin/info">我的信息</a></li>
+            {% endif %}
+
+            {% if active_item == "collection" %}
+            <li class="menu-li" id="menu-collection-active"><a href="../admin/collection">我的收藏</a></li>
+            {% else %}
+            <li class="menu-li" id="menu-collection"><a href="../admin/collection">我的收藏</a></li>
+            {% endif %}
+
+            {% if user_id == 6 %}
+                {% if active_item == "upload" %}
+                <li class="menu-li" id="menu-upload-active"><a href="../admin/upload">上传视频</a></li>
+                {% else %}
+                <li class="menu-li" id="menu-upload"><a href="../admin/upload">上传视频</a></li>
+                {% endif %}
+            {% endif %}
+
+            {% if user_id == 6 %}
+                {% if active_item == "users" %}
+                <li class="menu-li" id="menu-users-active"><a href="../admin/users">管理用户</a></li>
+                {% else %}
+                <li class="menu-li" id="menu-users"><a href="../admin/users">管理用户</a></li>
+                {% endif %}
+            {% endif %}
+
+            {% if user_id == 6 %}
+                {% if active_item == "movies" %}
+                <li class="menu-li" id="menu-movies-active"><a href="../admin/movies">管理视频</a></li>
+                {% else %}
+                <li class="menu-li" id="menu-movies"><a href="../admin/movies">管理视频</a></li>
+                {% endif %}
+            {% endif %}
+
+            {% if user_id %}
+                <button name="登出" onclick="signout()">登出</button>
+            {% endif %}
+            <script type="text/javascript">
+                function signout(){
+                    if (confirm("确定登出？")){
+                        window.location.replace('../login')
+                    }
+                }
+            </script>
+
+        </ul>
+    </div>
+<!--条目界面-->
+    {% if active_item == "info"%}
+    <!--我的信息-->
+    <div class="user_left_info">
+        <center><img src="../static/user_picture/{{ user_pic }}" /></center>
+        <p id="id">id:{{ user_id }}
+            {% if user_id == 6 %}
+            (您是管理员!)
+            {% endif %}
+        </p>
+        <p id="name">{{ user_name }}</p>
+    </div>
+    <div class="user_right_info">
+        <form action="/admin/modify-info" enctype="multipart/form-data" method="post">
+            <label>昵称</label><br>
+            <input type="text" name="name" id="user-name-id" value="{{ user_name }}"><br>
+            <label>签名</label><br>
+            <input type="text" name="sign" id="user-sign-id" value="{{ user_sign }}"><br>
+            <label>头像</label><br>
+            <input type="file" name="img" id="user-img-id" accept="image/*"><br>
+            <label>账号</label><br>
+            <input type="text" disabled="disabled" value="{{ user_number }}"><br>
+            <label>密码</label><br>
+            <input type="password" id="user-pwd-id" name="pwd" value="{{ user_pwd }}"><br>
+            <input type="submit" onclick="check_empty()" value="修改"></form>
+    </div>
+    <script type="text/javascript">
+        function check_empty() {
+            let name = document.getElementById("user-name-id").value;
+            let sign = document.getElementById("user-sign-id").value;
+            let pwd = document.getElementById("user-pwd-id").value;
+            if (name.length==0 || sign.length==0 || pwd.length==0){
+                alert("输入不能为空！")
+            }
+        }
+    </script>
+    {% elif active_item == "collection"%}
+    <!--我的收藏-->
+    <div class="manage-users">
+        <ul class="users-ul">
+            <li class="users-li-main">
+                <a class="aa1">ID</a><a class="aa2">电影名</a><a style="width: 240px" class="aa3">标签</a>
+            </li>
+            {% for user in all_collection %}
+            <li class="users-li">
+                <a class="a1">{{ user[0] }}</a><a class="b2">{{ user[1] }}</a><a class="b3">{{ user[2] }}</a>
+                <button class="movies-li-b" onclick="del_c(this)">取消收藏</button>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% elif active_item == "upload"%}
+    <!--上传视频-->
+    <div class="upload_video">
+        <form action="/admin/upload" enctype="multipart/form-data" method="POST">
+            <label>视频文件(仅支持MP4/OGG)</label><br>
+            <input type="file" accept="video/mp4, video/ogg" name="video"><br>
+            <label>封面文件</label><br>
+            <input type="file" accept="image/*" name="jpg"><br>
+            <label>电影名</label><br>
+            <input type="text" name="name" placeholder="电影名"><br>
+            <label>年份</label><br>
+            <input type="text" name="year" placeholder="2019"><br>
+            <label>标签</label><br>
+            <input style="width: 580px" type="text" name="tag" placeholder="such as:#喜剧#动作"><br>
+            <a>可用标签:喜剧，动作，剧情，动画，黑色幽默，传记，奇幻，剧情，家庭，科幻，爱情</a>
+            <label>简介</label><br>
+            <textarea name="summary" placeholder="简介"></textarea><br>
+            <input type="submit" value="上传">
+        </form>
+    </div>
+
+    {% elif active_item == "users"%}
+    <!--管理用户-->
+    <div class="manage-users">
+        <ul class="users-ul">
+            <li class="users-li-main">
+                <a class="aa1">ID</a><a class="aa2">昵称</a><a class="aa3">账号</a><a class="aa4">状态</a>
+            </li>
+            {% for user in all_users %}
+            <li class="users-li">
+                <a class="a1">{{ user[0] }}</a><a class="a2">{{ user[1] }}</a><a class="a3">{{ user[2] }}</a>
+                {% if user[3] == '1' %}
+                <a class="a4"></a>
+                {% endif %}
+                <button class="users-li-b" onclick="del(this)">移除</button>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% elif active_item == "movies"%}
+    <!--管理视频-->
+    <div class="manage-users">
+        <ul class="users-ul">
+            <li class="users-li-main">
+                <a class="aa1">ID</a><a class="aa2">电影名</a><a style="width: 240px" class="aa3">标签</a>
+            </li>
+            {% for user in all_movies %}
+            <li class="users-li">
+                <a class="a1">{{ user[0] }}</a><a class="b2">{{ user[1] }}</a><a class="b3">{{ user[2] }}</a>
+                <button class="movies-li-b" onclick="del_m(this)">移除</button>
+                <button class="movies-li-b1" onclick="mod(this)">修改</button>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    {% endif %}
+</div>
+
+<script type="text/javascript">
+    // 删除收藏
+    function del_c(e) {
+        if (confirm("确定删除该收藏？")){
+            let id_ = e.parentNode.childNodes[1].textContent;
+            req('collect_id:'+id_, 0, false);
+            window.location.reload();
+        }
+    }
+    // 删除用户
+    function del(e) {
+        if (confirm("确定删除用户？")){
+            let id_ = e.parentNode.childNodes[1].textContent;
+            req('id:'+id_, 0, false);
+            window.location.reload();
+        }
+    }
+    // 删除电影
+    function del_m(e) {
+        if (confirm("确定删除电影？")){
+            let id_ = e.parentNode.childNodes[1].textContent;
+            req('movie-id:'+id_, 0, false);
+            window.location.reload();
+        }
+    }
+    // 修改电影信息
+    function mod(e) {
+        let movie_id = e.parentNode.childNodes[1].textContent
+        // 询问电影信息
+        req('get-info'+movie_id, show_modify_window, true)
+    }
+    // 修改
+    function show_modify_window(info) {
+
+    }
+    // Ajax请求函数
+    function req(data, func, mode) {
+        let xmlhttp;
+        if (window.XMLHttpRequest) {
+            // IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+            xmlhttp=new XMLHttpRequest();
+        }
+        else {
+            // IE6, IE5 浏览器执行代码
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange=function() {
+            if (xmlhttp.readyState==4 && xmlhttp.status==200 && func!=0)
+            {
+              func(xmlhttp.responseText);
+            }
+        };
+        xmlhttp.open("POST","./" + data,mode);
+        xmlhttp.send();
+    }
+</script>
+
+{% endblock %}
+

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script language="javascript">
+      function aEvent() {
+           document.getElementById('oBtn').attachEvent('onclick', sText);
+      }
+
+      function dEvent() {
+           document.getElementById('oBtn').detachEvent('onclick', sText);
+      }
+
+      function sText() {
+           window.alert('看到效果了吗^^');
+      }
+</script>
+<button id="oBtn">点击我查看效果</button>
+<button onclick="aEvent();">添加事件</button>
+<button onclick="dEvent();">取消事件</button>
+</body>
+</html>

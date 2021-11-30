@@ -1,0 +1,39 @@
+body{
+    margin: 0;
+    display: block;
+}
+.header_div {
+    background-color:#0091ea;
+    width: auto;
+    height: 120px;
+}
+.header_item_ul{
+    padding: 20px 0;
+}
+
+.header_ul{
+    margin-left: 100px;
+    list-style: none;
+}
+
+.header_li{
+    display: block;
+    width: 100px;
+    float: left;
+}
+
+.header_a{
+    display: block;
+    width: 85px;
+    height: 40px;
+    font-family: 'sans-serif';
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 25px;
+    text-align: center;
+}
+.header_a:hover{
+    color: #0091ea;
+    border-radius: 10px;
+    background-color: #ffffff;
+}
